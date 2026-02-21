@@ -1,0 +1,20 @@
+repository := "docker.io/gblachmkii/zenoh"
+platforms := "linux/amd64,linux/arm64"
+
+zenoh_version := `git ls-remote --tags --sort=-v:refname https://github.com/eclipse-zenoh/zenoh.git | grep -v '\^{}' | head -1 | sed 's|.*refs/tags/||'`
+zenoh_minor := replace_regex(zenoh_version, "[.][0-9]+$", "")
+zenoh_major := replace_regex(zenoh_version, "[.].*", "")
+
+build:
+	podman manifest rm {{ repository }}:{{ zenoh_version }} || true
+	podman build --pull=newer \
+		--platform {{ platforms }} \
+		--manifest {{ repository }}:{{ zenoh_version }} \
+		--file Dockerfile \
+		--build-arg ZENOH_VERSION={{ zenoh_version }}
+
+push:
+	podman manifest push {{ repository }}:{{ zenoh_version }} {{ repository }}:{{ zenoh_version }}
+	podman manifest push {{ repository }}:{{ zenoh_version }} {{ repository }}:{{ zenoh_minor }}
+	podman manifest push {{ repository }}:{{ zenoh_version }} {{ repository }}:{{ zenoh_major }}
+	podman manifest push {{ repository }}:{{ zenoh_version }} {{ repository }}:latest

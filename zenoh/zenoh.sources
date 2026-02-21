@@ -1,0 +1,4 @@
+Types: deb
+URIs: https://download.eclipse.org/zenoh/debian-repo/
+Suites: /
+Signed-By: /etc/apt/keyrings/zenoh-public-key.gpg

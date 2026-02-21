@@ -1,0 +1,11 @@
+repository := "docker.io/gblachmkii/ros-z-console"
+platform := "linux/amd64"
+
+build:
+	podman build --pull=newer \
+		--platform {{ platform }} \
+		--tag {{ repository }}:latest \
+		--file Dockerfile
+
+push:
+	podman push {{ repository }}:latest {{ repository }}:latest
