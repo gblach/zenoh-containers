@@ -7,12 +7,12 @@ RUN apt-get update && \
 
 RUN git clone --depth=1 https://github.com/ZettaScaleLabs/ros-z.git
 
-WORKDIR /build/ros-z
+WORKDIR /build/ros-z/crates
 RUN cargo build --release -p ros-z-console
-RUN cargo install --offline --path ros-z-console
+RUN cargo install --path ros-z-console
 
 
-FROM dhi.io/debian-base:trixie
+FROM dhi.io/debian-base:trixie-dev
 
 COPY --from=builder /root/.cargo/ /usr/local/
 

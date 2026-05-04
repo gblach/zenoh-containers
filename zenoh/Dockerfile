@@ -1,4 +1,4 @@
-FROM dhi.io/debian-base:trixie
+FROM dhi.io/debian-base:trixie-dev
 
 ARG ZENOH_VERSION
 
