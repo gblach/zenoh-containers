@@ -1,4 +1,4 @@
-repository := "docker.io/gblachmkii/ros-z-console"
+repository := "docker.io/gblachmkii/hiroz-union"
 platform := "linux/amd64"
 
 build:

@@ -9,7 +9,7 @@ All images are based on [Docker Hardened Images](https://dhi.io) (Debian Trixie 
 | Directory | Image | Description |
 |-----------|-------|-------------|
 | [zenoh/](zenoh/) | [`docker.io/gblachmkii/zenoh`](https://hub.docker.com/r/gblachmkii/zenoh) | [Eclipse Zenoh](https://github.com/eclipse-zenoh/zenoh) router with all backends and plugins |
-| [ros-z-console/](ros-z-console/) | [`docker.io/gblachmkii/ros-z-console`](https://hub.docker.com/r/gblachmkii/ros-z-console) | [ros-z-console](https://github.com/ZettaScaleLabs/ros-z) from ZettaScaleLabs |
+| [hiroz-union/](hiroz-union/) | [`docker.io/gblachmkii/hiroz-union`](https://hub.docker.com/r/gblachmkii/hiroz-union) | [hiroz-union](https://github.com/ZettaScaleLabs/hiroz) from ZettaScaleLabs |
 
 ## Building
 
