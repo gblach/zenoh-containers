@@ -1,11 +1,20 @@
 repository := "docker.io/gblachmkii/hiroz-union"
 platform := "linux/amd64"
 
+hiroz_tag := `git ls-remote --tags --sort=-v:refname https://github.com/ZettaScaleLabs/hiroz.git | grep -v '\^{}' | head -1 | sed 's|.*refs/tags/||'`
+hiroz_version := trim_start_match(hiroz_tag, "v")
+hiroz_minor := replace_regex(hiroz_version, "[.][0-9]+$", "")
+hiroz_major := replace_regex(hiroz_version, "[.].*", "")
+
 build:
 	podman build --pull=newer \
 		--platform {{ platform }} \
-		--tag {{ repository }}:latest \
-		--file Dockerfile
+		--tag {{ repository }}:{{ hiroz_version }} \
+		--file Dockerfile \
+		--build-arg HIROZ_VERSION={{ hiroz_tag }}
 
 push:
-	podman push {{ repository }}:latest {{ repository }}:latest
+	podman push {{ repository }}:{{ hiroz_version }} {{ repository }}:{{ hiroz_version }}
+	podman push {{ repository }}:{{ hiroz_version }} {{ repository }}:{{ hiroz_minor }}
+	podman push {{ repository }}:{{ hiroz_version }} {{ repository }}:{{ hiroz_major }}
+	podman push {{ repository }}:{{ hiroz_version }} {{ repository }}:latest

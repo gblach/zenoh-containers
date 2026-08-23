@@ -1,12 +1,14 @@
 FROM dhi.io/rust:1-debian13-sfw-dev AS builder
 
+ARG HIROZ_VERSION
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git clang && \
     rm -rf /var/lib/apt/lists/* && \
     git config --global advice.detachedHead false
 
 WORKDIR /build
-RUN git clone --depth=1 https://github.com/ZettaScaleLabs/hiroz.git
+RUN git clone --depth=1 --branch ${HIROZ_VERSION} https://github.com/ZettaScaleLabs/hiroz.git
 
 WORKDIR /build/hiroz/crates
 RUN cargo install --path hiroz-union
